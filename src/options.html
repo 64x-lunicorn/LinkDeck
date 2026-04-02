@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="LinkDeck – Configuration: manage groups, sections, and links." />
+    <meta name="theme-color" content="#000000" />
+    <title>LinkDeck – Configuration</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="icons/icon128.png" type="image/png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+  </head>
+  <body>
+
+    <nav class="navbar">
+      <div class="container navbar-inner">
+        <span class="navbar-brand">Settings</span>
+        <a class="nav-link" href="newtab.html">Back to Board</a>
+      </div>
+    </nav>
+
+    <div class="options-layout">
+      <!-- ── Sidebar ─────────────────────────────────────── -->
+      <aside class="sidebar">
+        <h2 class="sidebar-heading">Configuration</h2>
+        <p class="sidebar-sub">Editor Mode</p>
+        <ul class="sidebar-nav">
+          <li>
+            <button class="sidebar-item active" data-view="general">
+              <span class="material-symbols-outlined">tune</span>
+              General
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-item" data-view="groups">
+              <span class="material-symbols-outlined">group_work</span>
+              Groups
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-item" data-view="yaml">
+              <span class="material-symbols-outlined">code</span>
+              YAML
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-item" data-view="backup">
+              <span class="material-symbols-outlined">backup</span>
+              Backup
+            </button>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- ── Canvas ──────────────────────────────────────── -->
+      <main class="canvas">
+
+        <!-- ── View: General ───────────────────────────── -->
+        <div id="viewGeneral" class="view-panel active">
+          <div class="canvas-header">
+            <div>
+              <h1 class="canvas-title">General</h1>
+              <p class="canvas-subtitle">Title and basic settings.</p>
+            </div>
+            <div class="button-row">
+              <button id="saveGeneral" class="btn btn-primary btn-sm">Save</button>
+              <span id="generalStatus" class="status-msg"></span>
+            </div>
+          </div>
+          <div class="collection-card" style="max-width: 480px;">
+            <div class="form-group">
+              <label class="form-label" for="cfgTitle">Board Title</label>
+              <input id="cfgTitle" class="form-input" type="text" placeholder="e.g. My Dashboard" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── View: Groups ─────────────────────────────── -->
+        <div id="viewGroups" class="view-panel">
+          <div class="canvas-header">
+            <div>
+              <h1 class="canvas-title">Groups &amp; Sections</h1>
+              <p class="canvas-subtitle">Edit groups, sections, and links visually.</p>
+            </div>
+            <div class="button-row">
+              <button id="saveGroups" class="btn btn-primary btn-sm">Save</button>
+              <span id="groupsStatus" class="status-msg"></span>
+            </div>
+          </div>
+          <div id="groupsEditor"></div>
+          <button id="addGroup" class="add-placeholder">
+            <span class="material-symbols-outlined">add_circle</span>
+            New Group
+          </button>
+        </div>
+
+        <!-- ── View: YAML ────────────────────────────────── -->
+        <div id="viewYaml" class="view-panel">
+          <div class="canvas-header">
+            <div>
+              <h1 class="canvas-title">YAML Editor</h1>
+              <p class="canvas-subtitle">Direct YAML editing for advanced users.</p>
+            </div>
+            <div class="button-row">
+              <button id="save" class="btn btn-primary btn-sm">Save</button>
+              <button id="loadDefaults" class="btn btn-secondary btn-sm">Load Defaults</button>
+              <span id="status" class="status-msg"></span>
+            </div>
+          </div>
+          <div class="mb-lg">
+            <div class="editor-wrap" id="editorWrap">
+              <div id="lineNumbers" class="line-numbers" aria-hidden="true"></div>
+              <textarea
+                id="yaml"
+                class="yaml-editor"
+                rows="20"
+                placeholder="Paste YAML here…"
+                spellcheck="false"
+                aria-label="YAML configuration"
+              ></textarea>
+            </div>
+            <div id="validation" class="validation-bar" aria-live="polite"></div>
+            <div id="storageWarning" class="storage-warning hidden" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <!-- ── View: Backup ──────────────────────────────── -->
+        <div id="viewBackup" class="view-panel">
+          <div class="canvas-header">
+            <div>
+              <h1 class="canvas-title">Backup &amp; Restore</h1>
+              <p class="canvas-subtitle">Export, import, and restore configurations.</p>
+            </div>
+          </div>
+          <div class="collection-card">
+            <div class="button-row mb-lg">
+              <button id="exportFile" class="btn btn-tertiary btn-sm">Export as File</button>
+              <label class="btn btn-tertiary btn-sm">
+                Import File
+                <input id="importFile" type="file" accept=".yaml,.yml,.txt" class="sr-only" />
+              </label>
+              <button id="copyClipboard" class="btn btn-tertiary btn-sm">Copy to Clipboard</button>
+            </div>
+            <h4 class="text-sm font-semi mb-sm">
+              Automatic Backups
+              <small class="text-muted">(last 10)</small>
+            </h4>
+            <div id="backupList" class="backup-list"></div>
+            <p id="noBackups" class="text-muted text-sm">No backups yet.</p>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <footer class="footer-fixed">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <a href="https://github.com/64x-lunicorn" target="_blank" rel="noopener" class="footer-link" aria-label="64x-lunicorn on GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a href="https://github.com/64x-lunicorn/LinkDeck" target="_blank" rel="noopener" class="footer-link">LinkDeck</a>
+        </div>
+        <div class="footer-right">
+          <div class="theme-toggle" id="themeToggle" aria-label="Theme">
+            <button data-theme="light" title="Light"><span class="material-symbols-outlined">light_mode</span></button>
+            <button data-theme="system" title="System" class="active"><span class="material-symbols-outlined">monitor</span></button>
+            <button data-theme="dark" title="Dark"><span class="material-symbols-outlined">dark_mode</span></button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="theme.js"></script>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

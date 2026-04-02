@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "LinkDeck",
+  "short_name": "LinkDeck",
+  "description": "Configurable Chrome new-tab dashboard with Tab Groups, YAML config, and WYSIWYG editor.",
+  "version": "2.0.0",
+  "author": "64x-lunicorn",
+  "homepage_url": "https://github.com/64x-lunicorn/LinkDeck",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "tabGroups"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "options_page": "options.html",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
+  }
+}

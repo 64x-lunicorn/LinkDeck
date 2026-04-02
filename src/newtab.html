@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Configurable new-tab dashboard with Chrome Tab Groups integration." />
+    <meta name="theme-color" content="#000000" />
+    <title>LinkDeck</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="icons/icon128.png" type="image/png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <span class="header-title" id="boardTitle">LinkDeck</span>
+        <div class="search-wrap">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input id="searchInput" class="search-input" type="text" placeholder="Search links…" autocomplete="off" aria-label="Search links" />
+          <span class="search-shortcut" id="searchShortcut">/</span>
+        </div>
+      </div>
+      <div class="container">
+        <div id="tabBar" class="tab-bar" role="tablist"></div>
+      </div>
+    </header>
+
+    <main class="container main-content">
+      <div id="mount" aria-live="polite"></div>
+      <div id="error"></div>
+    </main>
+
+    <footer class="footer-fixed">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <a href="https://github.com/64x-lunicorn" target="_blank" rel="noopener" class="footer-link" aria-label="64x-lunicorn on GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a href="https://github.com/64x-lunicorn/LinkDeck" target="_blank" rel="noopener" class="footer-link">LinkDeck</a>
+        </div>
+        <div class="footer-right">
+          <div class="theme-toggle" id="themeToggle" aria-label="Theme">
+            <button data-theme="light" title="Light"><span class="material-symbols-outlined">light_mode</span></button>
+            <button data-theme="system" title="System" class="active"><span class="material-symbols-outlined">monitor</span></button>
+            <button data-theme="dark" title="Dark"><span class="material-symbols-outlined">dark_mode</span></button>
+          </div>
+          <a id="openOptions" href="options.html" class="btn btn-primary btn-sm">Configure</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="theme.js"></script>
+    <script type="module" src="newtab.js"></script>
+  </body>
+</html>

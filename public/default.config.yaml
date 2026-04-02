@@ -1,0 +1,72 @@
+title: "LinkDeck"
+
+groups:
+  - name: "Development"
+    sections:
+      - title: "Code"
+        icon: "code"
+        color: blue
+        links:
+          - label: "GitHub"
+            url: "https://github.com"
+          - label: "Stack Overflow"
+            url: "https://stackoverflow.com"
+          - label: "MDN Web Docs"
+            url: "https://developer.mozilla.org"
+      - title: "Tools"
+        icon: "build"
+        color: cyan
+        links:
+          - label: "CodePen"
+            url: "https://codepen.io"
+          - label: "JSFiddle"
+            url: "https://jsfiddle.net"
+          - label: "Regex101"
+            url: "https://regex101.com"
+
+  - name: "Design"
+    sections:
+      - title: "Inspiration"
+        icon: "palette"
+        color: purple
+        links:
+          - label: "Dribbble"
+            url: "https://dribbble.com"
+          - label: "Behance"
+            url: "https://www.behance.net"
+          - divider: true
+          - label: "Google Fonts"
+            url: "https://fonts.google.com"
+          - label: "Material Icons"
+            url: "https://fonts.google.com/icons"
+      - title: "Colors"
+        icon: "colorize"
+        color: pink
+        links:
+          - label: "Coolors"
+            url: "https://coolors.co"
+          - label: "Color Hunt"
+            url: "https://colorhunt.co"
+
+  - name: "Productivity"
+    sections:
+      - title: "News"
+        icon: "newspaper"
+        color: yellow
+        links:
+          - label: "Hacker News"
+            url: "https://news.ycombinator.com"
+          - label: "Dev.to"
+            url: "https://dev.to"
+          - label: "CSS-Tricks"
+            url: "https://css-tricks.com"
+      - title: "Docs"
+        icon: "menu_book"
+        color: green
+        links:
+          - label: "Can I Use"
+            url: "https://caniuse.com"
+          - label: "Chrome APIs"
+            url: "https://developer.chrome.com/docs/extensions/reference/"
+          - label: "Vite"
+            url: "https://vite.dev"

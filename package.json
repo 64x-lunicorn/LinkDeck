@@ -1,0 +1,36 @@
+{
+  "name": "linkdeck",
+  "version": "2.0.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Configurable Chrome new-tab dashboard with Tab Groups, YAML config, and WYSIWYG editor.",
+  "author": "64x-lunicorn",
+  "homepage": "https://github.com/64x-lunicorn/LinkDeck",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/64x-lunicorn/LinkDeck.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "new-tab",
+    "dashboard",
+    "tab-groups",
+    "yaml"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.1.0",
+    "globals": "^17.4.0",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.2"
+  }
+}
