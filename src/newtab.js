@@ -1,4 +1,5 @@
 import { parseConfigYAML, normalize } from './parser.js';
+import { loadSearchEngine, buildSearchURL, loadSearchBarVisible } from './search-engines.js';
 
 /* ── Pastel color mapping for Chrome tab group enums ─────────── */
 
@@ -58,11 +59,13 @@ async function getConfigText() {
 
 /* ── DOM references ──────────────────────────────────────────── */
 
-const mount     = document.getElementById('mount');
-const err       = document.getElementById('error');
-const tabBar    = document.getElementById('tabBar');
-const titleEl   = document.getElementById('boardTitle');
-const searchIn  = document.getElementById('searchInput');
+const mount          = document.getElementById('mount');
+const err            = document.getElementById('error');
+const tabBar         = document.getElementById('tabBar');
+const titleEl        = document.getElementById('boardTitle');
+const spotlightForm       = document.getElementById('spotlightForm');
+const spotlightInput      = document.getElementById('spotlightInput');
+const searchCounter       = document.getElementById('searchCounter');
 
 const TAB_KEY = 'linkdeck_activeTab';
 
@@ -112,7 +115,7 @@ function buildCard(sec) {
     if (l.type === 'divider') {
       return h('li', {}, h('hr', { class: 'link-divider', role: 'separator', 'aria-hidden': 'true' }));
     }
-    const a = h('a', { class: 'link-item', href: l.url }, l.label);
+    const a = h('a', { class: 'link-item', href: l.url, title: l.url }, l.label);
     a.addEventListener('click', e => {
       e.preventDefault();
       openInTabGroup(l.url, sec.title, sec.color);
@@ -203,57 +206,55 @@ function activateTab(idx) {
   sessionStorage.setItem(TAB_KEY, String(idx));
 }
 
-/* ── Search ──────────────────────────────────────────────────── */
+/* ── Search (link filter — real-time) ────────────────────────── */
 
 function applySearch(query) {
   const q = query.trim().toLowerCase();
+
+  let totalLinks = 0;
+  let visibleLinks = 0;
 
   mount.querySelectorAll('.tab-panel').forEach(panel => {
     let visibleCards = 0;
 
     panel.querySelectorAll('.card').forEach(card => {
-      if (!q) { card.classList.remove('hidden'); visibleCards++; return; }
+      const links = Array.from(card.querySelectorAll('.link-item'));
+      totalLinks += links.length;
+
+      if (!q) { card.classList.remove('hidden'); visibleCards++; visibleLinks += links.length; return; }
 
       const title = (card.querySelector('.card-title')?.textContent || '').toLowerCase();
-      const links = Array.from(card.querySelectorAll('.link-item'))
-        .map(a => a.textContent.toLowerCase());
+      const linkTexts = links.map(a => a.textContent.toLowerCase());
 
-      const match = title.includes(q) || links.some(l => l.includes(q));
+      const match = title.includes(q) || linkTexts.some(l => l.includes(q));
       card.classList.toggle('hidden', !match);
-      if (match) visibleCards++;
+      if (match) { visibleCards++; visibleLinks += links.length; }
     });
 
     /* No-results hint */
     let hint = panel.querySelector('.no-results');
     if (visibleCards === 0 && q) {
       if (!hint) {
-        hint = h('div', { class: 'no-results' }, 'No results for \u201C' + query.trim() + '\u201D');
+        hint = h('div', { class: 'no-results' }, 'No results for \u201C' + query.trim() + '\u201D — press Enter to search the web');
         panel.appendChild(hint);
       } else {
-        hint.textContent = 'No results for \u201C' + query.trim() + '\u201D';
+        hint.textContent = 'No results for \u201C' + query.trim() + '\u201D — press Enter to search the web';
         hint.classList.remove('hidden');
       }
     } else if (hint) {
       hint.classList.add('hidden');
     }
   });
-}
 
-if (searchIn) {
-  searchIn.addEventListener('input', () => applySearch(searchIn.value));
-
-  /* Keyboard shortcut: "/" focuses search, Escape clears */
-  document.addEventListener('keydown', e => {
-    if (e.key === '/' && document.activeElement !== searchIn) {
-      e.preventDefault();
-      searchIn.focus();
+  /* Update search counter */
+  if (searchCounter) {
+    if (q) {
+      searchCounter.textContent = `${visibleLinks} of ${totalLinks} links`;
+      searchCounter.classList.remove('hidden');
+    } else {
+      searchCounter.classList.add('hidden');
     }
-    if (e.key === 'Escape' && document.activeElement === searchIn) {
-      searchIn.value = '';
-      applySearch('');
-      searchIn.blur();
-    }
-  });
+  }
 }
 
 /* ── Boot ─────────────────────────────────────────────────────── */
@@ -273,6 +274,55 @@ async function boot() {
     if (err) { err.innerHTML = ''; err.appendChild(msg); }
     else document.body.appendChild(msg);
   }
+
+  /* ── Spotlight: unified search (filter links + web search) ── */
+  try {
+    const [engine, visible] = await Promise.all([
+      loadSearchEngine(),
+      loadSearchBarVisible(),
+    ]);
+
+    if (spotlightForm) {
+      if (!visible) {
+        spotlightForm.classList.add('hidden');
+      } else {
+        spotlightForm.classList.remove('hidden');
+      }
+    }
+    if (spotlightInput) {
+      spotlightInput.placeholder = `Search links or ${engine.name}…`;
+    }
+
+    /* Real-time link filtering as user types */
+    if (spotlightInput) {
+      spotlightInput.addEventListener('input', () => applySearch(spotlightInput.value));
+    }
+
+    /* Enter → search the web */
+    if (spotlightForm) {
+      spotlightForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const q = spotlightInput.value.trim();
+        if (!q) return;
+        window.location.href = buildSearchURL(engine, q);
+      });
+    }
+
+    /* Keyboard shortcuts: "/" focuses, Escape clears */
+    if (spotlightInput) {
+      document.addEventListener('keydown', e => {
+        if (e.key === '/' && document.activeElement !== spotlightInput) {
+          e.preventDefault();
+          spotlightInput.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === spotlightInput) {
+          spotlightInput.value = '';
+          applySearch('');
+          spotlightInput.blur();
+        }
+      });
+    }
+  } catch { /* spotlight init failed — non-critical */ }
 }
 
 boot();

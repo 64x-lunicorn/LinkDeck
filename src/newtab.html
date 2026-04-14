@@ -14,11 +14,14 @@
     <header class="header">
       <div class="container header-inner">
         <span class="header-title" id="boardTitle">LinkDeck</span>
-        <div class="search-wrap">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input id="searchInput" class="search-input" type="text" placeholder="Search links…" autocomplete="off" aria-label="Search links" />
-          <span class="search-shortcut" id="searchShortcut">/</span>
-        </div>
+        <form id="spotlightForm" class="spotlight-wrap" action="#" autocomplete="off">
+          <span class="material-symbols-outlined spotlight-search-icon" aria-hidden="true">search</span>
+          <input id="spotlightInput" class="spotlight-input" type="text" placeholder="Search links or the web…" autocomplete="off" aria-label="Search links or the web" />
+          <span class="spotlight-shortcut" id="spotlightShortcut">/</span>
+          <button type="submit" class="spotlight-submit" title="Search the web" aria-label="Search the web">
+            <span class="material-symbols-outlined">travel_explore</span>
+          </button>
+        </form>
       </div>
       <div class="container">
         <div id="tabBar" class="tab-bar" role="tablist"></div>
@@ -26,6 +29,7 @@
     </header>
 
     <main class="container main-content">
+      <div id="searchCounter" class="search-counter hidden" aria-live="polite"></div>
       <div id="mount" aria-live="polite"></div>
       <div id="error"></div>
     </main>
