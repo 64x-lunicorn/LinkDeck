@@ -12,6 +12,13 @@ export default defineConfig({
       input: {
         newtab: resolve(__dirname, 'src/newtab.html'),
         options: resolve(__dirname, 'src/options.html'),
+        background: resolve(__dirname, 'src/background.js'),
+      },
+      output: {
+        entryFileNames(chunk) {
+          if (chunk.name === 'background') return 'background.js';
+          return 'assets/[name]-[hash].js';
+        },
       },
     },
   },

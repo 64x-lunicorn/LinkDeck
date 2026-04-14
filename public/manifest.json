@@ -3,7 +3,7 @@
   "name": "LinkDeck",
   "short_name": "LinkDeck",
   "description": "Configurable Chrome new-tab dashboard with Tab Groups, YAML config, and WYSIWYG editor.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "64x-lunicorn",
   "homepage_url": "https://github.com/64x-lunicorn/LinkDeck",
   "icons": {
@@ -12,8 +12,13 @@
   "permissions": [
     "storage",
     "tabs",
-    "tabGroups"
+    "tabGroups",
+    "contextMenus"
   ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
