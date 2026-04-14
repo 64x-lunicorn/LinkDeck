@@ -36,6 +36,7 @@
               <span class="material-symbols-outlined">group_work</span>
               Groups
             </button>
+            <ul id="sidebarGroupsList" class="sidebar-groups-list"></ul>
           </li>
           <li>
             <button class="sidebar-item" data-view="yaml">
@@ -73,6 +74,32 @@
               <input id="cfgTitle" class="form-input" type="text" placeholder="e.g. My Dashboard" />
             </div>
           </div>
+
+          <!-- Search Engine -->
+          <div class="collection-card" style="max-width: 480px;">
+            <div class="form-group">
+              <label class="form-label" for="engineSelect">Web Search Engine</label>
+              <p class="text-muted text-sm mb-md">Choose the search engine for web searches. Type to filter links, press Enter to search the web.</p>
+              <select id="engineSelect" class="engine-select">
+                <!-- filled by JS -->
+              </select>
+            </div>
+            <div id="customEngineFields" class="form-group hidden" style="margin-top: var(--space-md);">
+              <label class="form-label" for="customEngineName">Custom Engine Name</label>
+              <input id="customEngineName" class="form-input mb-md" type="text" placeholder="e.g. Startpage" />
+              <label class="form-label" for="customEngineUrl">URL Template</label>
+              <input id="customEngineUrl" class="form-input mb-sm" type="text" placeholder="https://www.startpage.com/sp/search?query={query}" />
+              <p class="text-muted text-sm">Use <code>{query}</code> as placeholder for the search term.</p>
+              <div id="customEngineError" class="text-sm status-error hidden" style="margin-top: var(--space-sm);"></div>
+            </div>
+            <div class="form-group" style="margin-top: var(--space-md);">
+              <label class="form-label">Visibility</label>
+              <label class="toggle-label" style="display: flex; align-items: center; gap: var(--space-sm); cursor: pointer;">
+                <input id="searchBarVisible" type="checkbox" checked />
+                <span class="text-sm">Show search bar on dashboard</span>
+              </label>
+            </div>
+          </div>
         </div>
 
         <!-- ── View: Groups ─────────────────────────────── -->
@@ -83,6 +110,12 @@
               <p class="canvas-subtitle">Edit groups, sections, and links visually.</p>
             </div>
             <div class="button-row">
+              <button id="undoGroups" class="btn btn-tertiary btn-sm" disabled title="Undo (Ctrl+Z)">
+                <span class="material-symbols-outlined" style="font-size:16px;margin-right:2px;">undo</span> Undo
+              </button>
+              <button id="redoGroups" class="btn btn-tertiary btn-sm" disabled title="Redo (Ctrl+Shift+Z)">
+                <span class="material-symbols-outlined" style="font-size:16px;margin-right:2px;">redo</span> Redo
+              </button>
               <button id="saveGroups" class="btn btn-primary btn-sm">Save</button>
               <span id="groupsStatus" class="status-msg"></span>
             </div>
