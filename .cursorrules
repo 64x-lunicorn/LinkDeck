@@ -1,0 +1,44 @@
+# Cursor Rules — LinkDeck
+
+## Project
+LinkDeck is a Chrome Extension (Manifest V3) — a configurable new-tab dashboard with Chrome Tab Groups. Vanilla JS + ES modules, Vite build, Vitest tests, ESLint.
+
+## Hard Rules
+- No frameworks (React, Vue, etc.) — vanilla JS only.
+- No external YAML libraries — `parser.js` is hand-written on purpose.
+- No `chrome.storage.sync` — use `chrome.storage.local` only.
+- No hardcoded colors in CSS — use design tokens (custom properties).
+- Never edit `src/icon-data.js` by hand — it is auto-generated.
+- Always run `npm run lint && npm test` before finishing.
+
+## Code Style
+- ES modules (`import`/`export`), `const` by default, `let` if needed, no `var`.
+- ESLint flat config. `no-unused-vars` = warning; prefix unused params with `_`.
+- Test files: `src/*.test.js` colocated with source. Framework: Vitest.
+- Chrome APIs and DOM are unavailable in tests — guard with `typeof`.
+- Comments in German or English are fine.
+
+## Architecture
+```
+src/newtab.js       — Dashboard rendering + Tab Groups + Spotlight search
+src/options.js      — WYSIWYG editor + YAML editor + backup
+src/parser.js       — YAML parse + normalize + serialize (hand-written)
+src/search-engines.js — Search engine presets + storage helpers
+src/icon-picker.js  — Material Icons picker (4176 icons, 17 category tabs)
+src/icon-data.js    — AUTO-GENERATED icon DB (do not touch)
+src/background.js   — Service worker (context menu)
+src/theme.js        — Light/system/dark toggle
+src/styles.css      — Design tokens + responsive (640px / 1024px)
+```
+
+## Config Schema
+Groups → Sections → Links. Chrome color enum: grey|blue|red|yellow|green|pink|purple|cyan|orange.
+Storage keys: `yamlText`, `searchEngine`, `searchBarVisible`, `yamlBackups`.
+
+## Commands
+```bash
+npm run dev          # Dev server
+npm run build        # Production → dist/
+npm run lint         # ESLint
+npm test             # Vitest (73 tests)
+```

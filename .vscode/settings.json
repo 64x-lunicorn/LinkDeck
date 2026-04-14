@@ -1,0 +1,22 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": false,
+  "eslint.validate": ["javascript"],
+  "files.exclude": {
+    "dist/": true,
+    "node_modules/": true,
+    ".DS_Store": true
+  },
+  "search.exclude": {
+    "dist/": true,
+    "node_modules/": true,
+    "src/icon-data.js": true
+  },
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml"
+  },
+  "css.customData": [],
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true
+}
