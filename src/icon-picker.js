@@ -168,9 +168,26 @@ export function createIconPicker(currentIcon, onChange) {
 /* ── Helpers ──────────────────────────────────────────────────── */
 
 function setDisplayValue(display, name) {
-  display.innerHTML = name
-    ? `<span class="material-symbols-outlined" aria-hidden="true">${name}</span><span class="icon-picker-label">${name}</span>`
-    : '<span class="icon-picker-label icon-picker-placeholder">Choose icon…</span>';
+  display.textContent = '';
+
+  if (name) {
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'material-symbols-outlined';
+    iconSpan.setAttribute('aria-hidden', 'true');
+    iconSpan.textContent = name;
+
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'icon-picker-label';
+    labelSpan.textContent = name;
+
+    display.appendChild(iconSpan);
+    display.appendChild(labelSpan);
+  } else {
+    const placeholderSpan = document.createElement('span');
+    placeholderSpan.className = 'icon-picker-label icon-picker-placeholder';
+    placeholderSpan.textContent = 'Choose icon…';
+    display.appendChild(placeholderSpan);
+  }
 }
 
 function closeAllPickers() {
