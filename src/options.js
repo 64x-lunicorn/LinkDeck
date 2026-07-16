@@ -475,7 +475,18 @@ import { createIconPicker } from './icon-picker.js';
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'sidebar-group-item';
-      btn.innerHTML = `<span class="sidebar-group-name">${name}</span><span class="sidebar-group-badge">${secCount}s · ${linkCount}l</span>`;
+
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'sidebar-group-name';
+      nameSpan.textContent = name;
+
+      const badgeSpan = document.createElement('span');
+      badgeSpan.className = 'sidebar-group-badge';
+      badgeSpan.textContent = `${secCount}s · ${linkCount}l`;
+
+      btn.appendChild(nameSpan);
+      btn.appendChild(badgeSpan);
+
       btn.addEventListener('click', () => {
         /* Switch to groups view if not active */
         const groupsBtn = document.querySelector('.sidebar-item[data-view="groups"]');
