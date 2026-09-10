@@ -77,7 +77,7 @@ Then load it into Chrome:
 
 | Dashboard | Groups Editor | Settings |
 |:-:|:-:|:-:|
-| <img src="images/tab_selection.png" alt="Dashboard" /> | <img src="images/groupds_config.png" alt="Groups editor" /> | <img src="images/general_config.png" alt="General settings" /> |
+| <img src="images/tab_selection.png" alt="Dashboard" /> | <img src="images/groups_config.png" alt="Groups editor" /> | <img src="images/general_config.png" alt="General settings" /> |
 
 ---
 
