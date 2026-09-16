@@ -34,7 +34,8 @@ const FILES = {
 const read = file => readFileSync(resolve(ROOT, file), 'utf8');
 const readJson = file => JSON.parse(read(file));
 const writeJson = (file, data) => writeFileSync(resolve(ROOT, file), `${JSON.stringify(data, null, 2)}\n`);
-const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+const git = (...args) =>
+  execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 
 function readVersionFiles() {
   return {
