@@ -48,7 +48,7 @@ npm install          # Install dependencies
 npm run dev          # Vite dev server
 npm run build        # Production build → dist/
 npm run lint         # ESLint
-npm test             # Vitest (single run, 73 tests)
+npm test             # Vitest (single run, 94 tests)
 npm run test:watch   # Vitest watch mode
 ```
 
@@ -106,11 +106,11 @@ groups:
 - Framework: Vitest — tests run in Node.js, not in a browser.
 - Test files: `src/*.test.js` — colocated with source.
 - Chrome APIs and DOM APIs are unavailable in tests.
-- 73 tests total: parser (61), search-engines (11), icon-picker (1).
+- 94 tests total: parser (61), release (21), search-engines (11), icon-picker (1).
 
 ## CI/CD
 
 - **CI** (`ci.yml`): lint → test → build → `npm audit` on push/PR to `main`.
 - **CodeQL** (`codeql.yml`): JavaScript security scanning weekly + on push/PR.
-- **Release** (`release.yml`): on `v*` tag → build → zip → GitHub Release.
+- **Release** (`release.yml`): on a version bump merged to `main` → checks → build → zip + provenance → tag + GitHub Release → Chrome Web Store (once configured). See `docs/releasing.md`.
 - **Dependabot**: weekly npm + GitHub Actions updates.

@@ -22,4 +22,4 @@ A `## Verification` section before Consequences records how the decision was che
 
 ## Index
 
-None yet.
+- [0001 — Release on the merge of a version bump](0001-release-on-version-bump-merge.md) — accepted
