@@ -5,6 +5,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [2.2.0] – 2026-09-16
+
+### Added
+- **Extension icon**: LinkDeck now has a real icon at 16, 32, 48 and 128 px — previously the extensions page, the toolbar menu and the README showed an empty placeholder (#46)
+- **Verifiable release builds**: Every release ships `linkdeck-vX.Y.Z.zip` with a SHA-256 checksum and a build provenance attestation (`gh attestation verify`) (#54)
+
+### Security
+- **Options sidebar**: Group names are inserted as text instead of HTML, so a group name from an imported config can no longer inject markup (#32)
+- **Icon picker**: The selected icon name is inserted as text instead of HTML (#33)
+
 ## [2.1.0] – 2026-04-14
 
 ### Added
