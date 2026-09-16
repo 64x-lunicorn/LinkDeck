@@ -24,7 +24,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "ci": "npm run lint && npm test && npm run build"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
