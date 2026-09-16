@@ -1,7 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title">
-  <!-- write-readme placeholder: replace this file with the project banner. -->
-  <title id="title">LinkDeck banner placeholder</title>
-  <rect width="1200" height="340" fill="#1e293b"/>
-  <text x="600" y="170" fill="#f8fafc" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="64" font-weight="700" text-anchor="middle">LinkDeck</text>
-  <text x="600" y="230" fill="#94a3b8" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="24" text-anchor="middle">Banner placeholder</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
+  <title id="title">LinkDeck banner</title>
+  <desc id="desc">LinkDeck — a configurable Chrome new-tab dashboard with color-coded Tab Groups</desc>
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1200" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1e1b4b"/>
+      <stop offset="1" stop-color="#0b0a1a"/>
+    </linearGradient>
+    <linearGradient id="iconBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="1" stop-color="#171436"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="340" fill="url(#pageBg)"/>
+
+  <!-- soft brand-colour accents -->
+  <circle cx="1120" cy="30" r="170" fill="#6366f1" opacity="0.07"/>
+  <circle cx="1190" cy="330" r="130" fill="#22c55e" opacity="0.06"/>
+
+  <!-- app icon, scaled up from public/icons/icon.svg -->
+  <g transform="translate(90,60) scale(1.71875)">
+    <rect x="2" y="2" width="124" height="124" rx="27" fill="url(#iconBg)"/>
+    <rect x="2.75" y="2.75" width="122.5" height="122.5" rx="26.25" fill="none" stroke="#4c46a3" stroke-width="1.5"/>
+    <rect x="24" y="24" width="36" height="36" rx="9" fill="#6366f1"/>
+    <rect x="68" y="24" width="36" height="36" rx="9" fill="#f59e0b"/>
+    <rect x="24" y="68" width="36" height="36" rx="9" fill="#22c55e"/>
+    <rect x="68" y="68" width="36" height="36" rx="9" fill="#0ea5e9"/>
+  </g>
+
+  <text x="380" y="178" fill="#f8fafc" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="84" font-weight="700">LinkDeck</text>
+  <rect x="382" y="200" width="64" height="5" rx="2.5" fill="#6366f1"/>
+  <text x="382" y="240" fill="#94a3b8" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" font-weight="400">Your new tab, finally worth opening.</text>
 </svg>
