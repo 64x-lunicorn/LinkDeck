@@ -2,45 +2,49 @@
 
 Thanks for your interest in contributing! Here's how to get started.
 
-## Development Setup
+## Before you start
+
+- Search [existing issues](https://github.com/64x-lunicorn/LinkDeck/issues) before opening a new one, and discuss larger changes in an issue before starting a pull request.
+- Read the [project overview](README.md) and [CLAUDE.md](CLAUDE.md).
+- Keep discussions respectful, constructive and focused on the work.
+- For vulnerabilities, follow [SECURITY.md](SECURITY.md) rather than opening a public issue.
+
+## Development setup
 
 ```bash
+# Node.js 24
 git clone https://github.com/64x-lunicorn/LinkDeck.git
 cd LinkDeck
+git checkout -b my-feature main
 npm install
 ```
 
-## Scripts
+## Checks
 
-| Command             | Description              |
-| ------------------- | ------------------------ |
-| `npm run dev`       | Vite dev server          |
-| `npm run build`     | Production build → dist/ |
-| `npm run lint`      | ESLint                   |
-| `npm test`          | Run tests (vitest)       |
-| `npm run test:watch`| Tests in watch mode      |
+Before pushing, run the whole gate in one command:
 
-## Workflow
+```bash
+npm run ci
+```
 
-1. Fork the repo and create a feature branch from `main`.
-2. Make your changes.
-3. Run `npm run lint && npm test` — both must pass.
-4. Commit with a clear message (e.g. `fix: search clears on Escape`).
-5. Open a Pull Request against `main`.
+It runs every check CI runs: Lint, Test, Build, Security audit. On a pull request, CI also runs Workflow lint and Secret scan and ends in `CI gate`, the only required status check. [docs/ci-cd.md](docs/ci-cd.md) describes the gate and the rules on `main`.
 
-## Code Style
+## Code style
 
-- ESLint with the default recommended config — run `npm run lint`.
-- No external YAML library — the parser is hand-written on purpose.
+- ESLint, default recommended config — run `npm run lint`.
+- No external YAML library — `src/parser.js` is hand-written on purpose.
 - CSS uses custom properties (design tokens) — avoid hardcoded colors.
 
-## Reporting Issues
+## Commit message example
 
-Open a [GitHub Issue](https://github.com/64x-lunicorn/LinkDeck/issues) with:
-- Steps to reproduce
-- Expected vs actual behavior
-- Chrome version
+- `fix: search clears on Escape`
 
-## License
+## Submitting a pull request
 
-By contributing you agree that your contributions will be licensed under the [GPLv3](LICENSE).
+1. Keep the change focused and avoid unrelated formatting or refactors.
+2. Explain the problem and the solution, and link the issue.
+3. Add or update tests for changed behaviour, and update the affected documentation.
+4. Write commits as Conventional Commits in English imperative mood.
+5. List the checks you ran and any known limitations.
+
+Only contribute material you have the right to submit. Contributions are made under the existing [GNU General Public License v3.0](LICENSE).

@@ -1,0 +1,18 @@
+setup_version: 3
+forge: github
+default_branch: main
+research:
+  path: research/
+  tracked: true  # false = gitignored, local only
+issues:
+  tracker: forge
+  path: null
+ci:
+  command: npm run ci
+  runtime: { stack: node, node: "24" }
+  runner: null
+  checks:
+    - { name: Lint, run: npm run lint, required: true }
+    - { name: Test, run: npm test, required: true }
+    - { name: Build, run: npm run build, required: true }
+    - { name: Security audit, run: npm audit --omit=dev, required: true }
