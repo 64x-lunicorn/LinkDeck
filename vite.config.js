@@ -22,4 +22,9 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    // root is src/ for the build; tests also live in scripts/.
+    dir: __dirname,
+    include: ['src/**/*.test.js', 'scripts/**/*.test.mjs'],
+  },
 });

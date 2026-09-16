@@ -22,10 +22,11 @@ LinkDeck is a Chrome Extension (Manifest V3) that replaces the new-tab page with
 npm install          # Install dependencies
 npm run dev          # Vite dev server
 npm run lint          # ESLint
-npm test              # Vitest — 73 tests
+npm test              # Vitest — 94 tests
 npm run build         # Production build → dist/
 npm run test:watch    # Vitest in watch mode
 npm run ci            # Full validation — lint, test, build
+npm run release       # Prepare a release PR — see docs/releasing.md
 ```
 
 ## Architecture
@@ -42,11 +43,12 @@ npm run ci            # Full validation — lint, test, build
 - `public/manifest.json` — Chrome MV3 manifest
 - `public/default.config.yaml` — Shipped default config
 - `public/icons/` — Extension icons
+- `scripts/release.mjs` — Release command line; logic in `scripts/release-lib.mjs`
 
 ## Testing
 
-- Vitest, tests in `src/*.test.js` next to source files.
-- 73 tests: parser (61), search-engines (11), icon-picker (1).
+- Vitest, tests in `src/*.test.js` and `scripts/*.test.mjs` next to source files.
+- 94 tests: parser (61), release (21), search-engines (11), icon-picker (1).
 - Tests run in Node.js, not in a browser.
 
 ## Config schema
@@ -82,5 +84,6 @@ PRs as a request surface: no — external pull requests are not treated as featu
 - Commits follow Conventional Commits in imperative mood.
 - Work on a branch; `main` changes only through a squash-merged pull request that passed `CI gate`.
 - Run `npm run ci` before pushing; it runs every check the gate runs.
+- Releases go through `npm run release` and a `chore(release): vX.Y.Z` pull request; never push a `v*` tag by hand. See [docs/releasing.md](docs/releasing.md).
 - Issues live in the GitHub issues of `64x-lunicorn/LinkDeck`, with the closed label set.
 - Ideas live in `research/` and reach code only after promotion to a Spec.

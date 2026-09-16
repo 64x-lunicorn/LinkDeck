@@ -17,7 +17,7 @@ applyTo: "*.test.js"
 - Use `describe` / `it` blocks.
 - Import from Vitest: `import { describe, it, expect } from 'vitest'`.
 - One test file per module is sufficient; cover critical paths and edge cases.
-- Current test count: 73 tests across 3 files (parser: 61, search-engines: 11, icon-picker: 1).
+- Current test count: 94 tests across 4 files (parser: 61, release: 21, search-engines: 11, icon-picker: 1).
 
 ## Running
 ```bash

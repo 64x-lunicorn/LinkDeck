@@ -29,6 +29,10 @@ npm run ci
 
 It runs every check CI runs: Lint, Test, Build, Security audit. On a pull request, CI also runs Workflow lint and Secret scan and ends in `CI gate`, the only required status check. [docs/ci-cd.md](docs/ci-cd.md) describes the gate and the rules on `main`.
 
+## Releases
+
+Maintainers cut releases with `npm run release` and a release pull request; [docs/releasing.md](docs/releasing.md) describes versioning, the changelog and what the merge triggers.
+
 ## Code style
 
 - ESLint, default recommended config — run `npm run lint`.

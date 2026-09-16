@@ -25,7 +25,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "ci": "npm run lint && npm test && npm run build"
+    "ci": "npm run lint && npm test && npm run build",
+    "release": "node scripts/release.mjs prepare"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

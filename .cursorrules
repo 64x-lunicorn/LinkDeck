@@ -40,5 +40,5 @@ Storage keys: `yamlText`, `searchEngine`, `searchBarVisible`, `yamlBackups`.
 npm run dev          # Dev server
 npm run build        # Production → dist/
 npm run lint         # ESLint
-npm test             # Vitest (73 tests)
+npm test             # Vitest (94 tests)
 ```
